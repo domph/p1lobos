@@ -1,5 +1,8 @@
 # p1lobos
 
+## Tracking Sheet/Schedule
+https://github.com/domph/p1lobos-doodlejump/projects/1
+
 ## Team Githubs
 Contributor | GitHub Link |
 ----------- | ----------- |
