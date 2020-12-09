@@ -1,7 +1,12 @@
-# p1lobos
+# p1lobos | Doodle Jump
 
 ## Tracking Sheet/Schedule
 https://github.com/domph/p1lobos-doodlejump/projects/1
+
+## Changelog (Big Ticket items)
+
+Date | Changes |
+----------- | ----------- |
 
 ## Team Githubs
 Contributor | GitHub Link |
