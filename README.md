@@ -8,7 +8,7 @@ https://github.com/domph/p1lobos-doodlejump/projects/1
 Date | Changes |
 ----------- | ----------- |
 
-## Team Githubs
+## Contributors
 Contributor | GitHub Link |
 ----------- | ----------- |
 Dominic Phung | [@domph](https://github.com/domph) |
