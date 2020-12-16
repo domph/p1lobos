@@ -1,5 +1,7 @@
 package Model;
 
+import java.awt.*;
+
 //the main part of the model; describes the state of the game at a given time
 public class GameState {
 
@@ -9,7 +11,7 @@ public class GameState {
     public Platform[] platforms = new Platform[32]; //stores data for all platforms
     public Monster[] monsters = new Monster[8]; //stores data for all monsters
     public PowerUp[] powerUps = new PowerUp[4]; //stores data for all powerUps
-    public Player p = new Player(0.0, 0.0, 0.0, 0.0); //spawns player at arbitrary initial position
+    public Player p = new Player(new Color(50, 50, 50), 0.0, 0.0, 0.0, 0.0); //spawns player at arbitrary initial position
 
 
     public boolean checkPlatformCollisions() {
