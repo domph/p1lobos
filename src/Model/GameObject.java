@@ -2,31 +2,21 @@ package Model;
 
 import java.awt.*;
 
-public class GameObject {
+public class GameObject extends GraphicsElement {
 
-    public double xPosition;
-    public double yPosition;
-    public double xSize;
-    public double ySize;
-    public double xVelocity;
-    public double yVelocity;
+    private double VelX;
+    private double VelY;
 
-    public Color InternalColor;
-
-    public GameObject(Color C, double xPos, double yPos, double xSz, double ySz) {
-        InternalColor = C;
-        xPosition = xPos;
-        yPosition = yPos;
-        xSize = xSz;
-        ySize = ySz;
-    }
-    public void setPosition(double x, double y){
-        xPosition = x;
-        yPosition = y;
+    public GameObject(double PosX, double PosY, double SizeX, double SizeY, Color DisplayColor) {
+        super(PosX, PosY, SizeX, SizeY, DisplayColor);
     }
 
-    public void SetVelocity(double vx, double vy) {
-        xVelocity = vx;
-        yVelocity = vy;
+    public void SetVelocity(double VX, double VY) {
+        VelX = VX;
+        VelY = VY;
+    }
+
+    public void UpdatePhysics(double TimeDelta) {
+        SetPosition(GetPosX() + (VelX * TimeDelta), GetPosY() + (VelY * TimeDelta));
     }
 }
