@@ -8,6 +8,7 @@ public class Platform extends GameObject{
     int width;
     int height;
     double position;
+    double delay;
     public final double RADIUS = 2.0;
     public int platformType; //0=normal, etc.
 
@@ -20,7 +21,7 @@ public class Platform extends GameObject{
 
     }
 
-    public void RandomGeneration(JFrame frame){
+    public void RandomGeneration(JFrame frame, float playerSpeed){
         int width = frame.getContentPane().getWidth();
         int height = frame.getContentPane().getHeight();
         double Random = Math.random();
@@ -30,8 +31,14 @@ public class Platform extends GameObject{
             position = -width*Random;
         else
             position = 0;
-
+        delay = ((Math.random()*2)/playerSpeed);
         CreatePlatform(position, (height/2));
+        try {
+            Thread.sleep((int) delay * 1000);
+        }
+        catch(InterruptedException e){
+            Thread.currentThread().interrupt();
+        }
     }
     public void CreatePlatform (double xpos,double ypos){
 
