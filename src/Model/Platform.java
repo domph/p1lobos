@@ -22,11 +22,11 @@ public class Platform extends GameObject{
         int width = frame.getContentPane().getWidth();
         int height = frame.getContentPane().getHeight();
         double Random = Math.random();
-        int position = (int) Random*width;
-        CreatePlatform(position);
+        double position =  Random*width;
+        CreatePlatform(position, (height/2));
     }
-    public void CreatePlatform(int position){
-
+    public void CreatePlatform (double xpos,double ypos){
+        Platform(xpos,ypos);
     }
 }
 
