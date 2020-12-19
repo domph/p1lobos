@@ -5,7 +5,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Platform extends GameObject{
-
+    int width;
+    int height;
+    double position;
     public final double RADIUS = 2.0;
     public int platformType; //0=normal, etc.
 
@@ -22,11 +24,17 @@ public class Platform extends GameObject{
         int width = frame.getContentPane().getWidth();
         int height = frame.getContentPane().getHeight();
         double Random = Math.random();
-        double position =  Random*width;
+        if (Random > 0.5)
+            position = width*Random;
+        else if (Random< 0.5)
+            position = -width*Random;
+        else
+            position = 0;
+
         CreatePlatform(position, (height/2));
     }
     public void CreatePlatform (double xpos,double ypos){
-        Platform(xpos,ypos);
+
     }
 }
 
