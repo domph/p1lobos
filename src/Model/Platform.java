@@ -1,4 +1,6 @@
 package Model;
+import javax.swing.*;
+
 
 import java.awt.*;
 
@@ -11,4 +13,20 @@ public class Platform extends GameObject{
         super(c,x,y,xV,yV);
         platformType = type;
     }
+
+    public static void main(String[] args) {
+
+    }
+
+    public void RandomGeneration(JFrame frame){
+        int width = frame.getContentPane().getWidth();
+        int height = frame.getContentPane().getHeight();
+        double Random = Math.random();
+        int position = (int) Random*width;
+        CreatePlatform(position);
+    }
+    public void CreatePlatform(int position){
+
+    }
 }
+
