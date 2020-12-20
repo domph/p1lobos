@@ -1,6 +1,7 @@
 package Model;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class GraphicsElement {
 	private double PosX;
@@ -8,7 +9,7 @@ public class GraphicsElement {
 	private double SizeX;
 	private double SizeY;
 	private Color DisplayColor;
-	// Future: custom graphics (go beyond rectangles)
+	private BufferedImage DisplayImage;
 
 	GraphicsElement(double PosX, double PosY, double SizeX, double SizeY, Color DisplayColor) {
 		this.PosX = PosX;
@@ -16,6 +17,14 @@ public class GraphicsElement {
 		this.SizeX = SizeX;
 		this.SizeY = SizeY;
 		this.DisplayColor = DisplayColor;
+	}
+
+	GraphicsElement(double PosX, double PosY, double SizeX, double SizeY, BufferedImage DisplayImage) {
+		this.PosX = PosX;
+		this.PosY = PosY;
+		this.SizeX = SizeX;
+		this.SizeY = SizeY;
+		this.DisplayImage = DisplayImage;
 	}
 
 	public void SetPosition(double PosX, double PosY) {
@@ -51,4 +60,6 @@ public class GraphicsElement {
 	public Color GetColor() {
 		return DisplayColor;
 	}
+
+	public BufferedImage GetImage() { return DisplayImage; }
 }
