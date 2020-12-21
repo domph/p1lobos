@@ -8,7 +8,9 @@
 
 Date | Changes |
 ----------- | ----------- |
-12/20 | - Graphics framework: rendering of game objects; currently supports both colored rectangles and images (for images, physics calculations done on internal rectangle)\n- Branch: [graphicstest](https://github.com/domph/p1lobos-doodlejump/tree/graphicstest)\n - |
+12/20 | - Graphics framework: rendering of game objects; currently supports both colored rectangles and images (for images, physics calculations done on internal rectangle)
+- Branch: [graphicstest](https://github.com/domph/p1lobos-doodlejump/tree/graphicstest)
+- |
 
 ## Contributors
 Contributor | GitHub Link |
