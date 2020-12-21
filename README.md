@@ -8,6 +8,7 @@
 
 Date | Changes |
 ----------- | ----------- |
+12/20 | - Graphics framework: rendering of game objects; currently supports both colored rectangles and images (for images, physics calculations done on internal rectangle) |
 
 ## Contributors
 Contributor | GitHub Link |
