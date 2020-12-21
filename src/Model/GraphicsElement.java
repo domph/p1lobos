@@ -9,7 +9,7 @@ public class GraphicsElement {
 	private double SizeX;
 	private double SizeY;
 	private Color DisplayColor;
-	private BufferedImage DisplayImage;
+	private BufferedImage DisplayImage;	// if this is NOT null, then it will be drawn (see GamePanel)
 
 	GraphicsElement(double PosX, double PosY, double SizeX, double SizeY, Color DisplayColor) {
 		this.PosX = PosX;

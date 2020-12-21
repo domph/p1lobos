@@ -24,6 +24,7 @@ public class GamePanel extends JPanel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		for (GameObject GO : ObjectsToDraw) {
+			// Depending on whether an image is set or not, draw a rectangle or draw the image
 			if (GO.GetImage() != null) {
 				g.drawImage(GO.GetImage(), (int)GO.GetPosX(), (int)GO.GetPosY(), null);
 			} else {
@@ -41,6 +42,7 @@ public class GamePanel extends JPanel {
 		repaint();
 	}
 
+	// Add object to the list of objects rendered
 	public void AddObject(GameObject GO) {
 		ObjectsToDraw.add(GO);
 	}

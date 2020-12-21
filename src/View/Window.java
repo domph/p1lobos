@@ -42,7 +42,7 @@ public class Window extends JFrame {
 	public void ShowMainMenu() {
 		remove(GP);
 		add(MM);
-		repaint();
+		repaint();	// repaint call necessary to update drawing
 		if (PhysicsUpdater != null) {
 			PhysicsUpdater.stop();
 		}
@@ -52,6 +52,7 @@ public class Window extends JFrame {
 		remove(MM);
 		add(GP);
 		repaint();
+		// Update physics every `DesiredDelta` seconds (set by gamecontrol)
 		PhysicsUpdater = new Timer((int)(DesiredDelta * 1000), e -> GP.UpdatePhysics(DesiredDelta));
 		PhysicsUpdater.start();
 	}
