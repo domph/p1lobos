@@ -118,25 +118,10 @@ class ButtonWrapper {
 	}	// so the main function can edit the button if desired
 }
 
-class GameObjectPanel extends JPanel {
-	ArrayList<GameObject> ObjectsToDraw = new ArrayList<>();
-	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
-		for (GameObject GO : ObjectsToDraw) {
-			g.setColor(GO.InternalColor);
-			g.fillRect((int)GO.xPosition, (int)GO.yPosition, (int)GO.xSize, (int)GO.ySize);
-		}
-	}
-
-	public void AddObject(GameObject GO) {
-		ObjectsToDraw.add(GO);
-	}
-}
-
 public class Window extends JFrame {
-	private JPanel MenuPanel = new JPanel();
-	private GameObjectPanel GamePanel = new GameObjectPanel();
+
+	public JPanel MenuPanel = new JPanel();
+	public GameObjectPanel GamePanel = new GameObjectPanel();
 
 	public Window() {
 		setTitle("Doodle Jump Prototype");
@@ -164,6 +149,7 @@ public class Window extends JFrame {
 
 				GameObject GO = new GameObject(new Color(23, 23, 23), 100, 100, 100, 100);
 				GamePanel.AddObject(GO);
+				GamePanel.requestFocusInWindow();
 			}
 		});
 		setVisible(true);
