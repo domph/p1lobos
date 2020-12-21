@@ -1,8 +1,9 @@
 # p1lobos | Doodle Jump
 
 ## Important Links
-- [Project Plan](https://docs.google.com/document/d/1jYTJFEbOkNMGJ4XClDhd64PQ3HHtHixpTIzzufnhGJk/edit?usp=sharing)
+- [Project Log](https://docs.google.com/document/d/183GGKcwBCoPLayzWtoN5GUf1e28PHwusKpWpgJqbUK8/edit)
 - [Tracking Sheet](https://github.com/domph/p1lobos-doodlejump/projects/1)
+- [Project Plan](https://docs.google.com/document/d/1jYTJFEbOkNMGJ4XClDhd64PQ3HHtHixpTIzzufnhGJk/edit?usp=sharing)
 
 ## Changelog (Big Ticket items)
 
