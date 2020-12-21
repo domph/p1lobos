@@ -8,7 +8,7 @@
 
 Date | Changes |
 ----------- | ----------- |
-12/20 | - [Graphics framework](https://github.com/domph/p1lobos-doodlejump/blob/graphicstest/src/View/GamePanel.java): rendering of game objects; currently supports both colored rectangles and images (for images, physics calculations done on internal rectangle) <br> - [Basic main menu](https://github.com/domph/p1lobos-doodlejump/blob/graphicstest/src/View/MainMenu.java): API for easily adding buttons; play button is the current entry point into game panel <br> - Current Branch: [graphicstest](https://github.com/domph/p1lobos-doodlejump/tree/graphicstest) (integration later) |
+12/20 | - [Graphics framework](https://github.com/domph/p1lobos-doodlejump/blob/graphicstest/src/View/GamePanel.java): drawing of game objects; currently supports both colored rectangles and images (for images, physics calculations done on internal rectangle) <br> - [Basic main menu](https://github.com/domph/p1lobos-doodlejump/blob/graphicstest/src/View/MainMenu.java): API for easily adding buttons; play button is the current entry point into game panel <br> - Current Branch: [graphicstest](https://github.com/domph/p1lobos-doodlejump/tree/graphicstest) (integration later) |
 
 ## Contributors
 Contributor | GitHub Link |
