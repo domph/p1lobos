@@ -1,13 +1,15 @@
 # p1lobos | Doodle Jump
 
 ## Important Links
-- [Project Plan](https://docs.google.com/document/d/1jYTJFEbOkNMGJ4XClDhd64PQ3HHtHixpTIzzufnhGJk/edit?usp=sharing)
+- [Project Log](https://docs.google.com/document/d/183GGKcwBCoPLayzWtoN5GUf1e28PHwusKpWpgJqbUK8/edit)
 - [Tracking Sheet](https://github.com/domph/p1lobos-doodlejump/projects/1)
+- [Project Plan](https://docs.google.com/document/d/1jYTJFEbOkNMGJ4XClDhd64PQ3HHtHixpTIzzufnhGJk/edit?usp=sharing)
 
 ## Changelog (Big Ticket items)
 
 Date | Changes |
 ----------- | ----------- |
+12/20 | - [Graphics framework (graphicstest branch)](https://github.com/domph/p1lobos-doodlejump/blob/graphicstest/src/View/GamePanel.java): drawing of game objects; currently supports both colored rectangles and images (for images, physics calculations done on internal rectangle) <br> - [Basic main menu (graphicstest branch)](https://github.com/domph/p1lobos-doodlejump/blob/graphicstest/src/View/MainMenu.java): API for easily adding [buttons](https://github.com/domph/p1lobos-doodlejump/tree/graphicstest/src/View/UIUtilities); play button is the current entry point into game panel <br> - [keyrecognition (branch)](https://github.com/domph/p1lobos-doodlejump/tree/keyrecognition) adds recognition of when the left or right arrow key are pressed|
 
 ## Contributors
 Contributor | GitHub Link |
