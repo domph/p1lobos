@@ -17,6 +17,7 @@ public class MainMenu extends JPanel {
 	private ArrayList<JButton> ButtonList = new ArrayList<>();
 	private Window CurrentWindow;
 
+
 	// Buttons are currently uniform, so the main parameters are the text displayed and the mouse events
 	public JButton AddButton(String Text, MouseAdapter MA) {
 		JButton NewButton = new ButtonWrapper(this, Text, 0, 0, BUTTON_SIZE.width, BUTTON_SIZE.height, BUTTON_COLOR, 50, 80, 16).GetButtonObject();

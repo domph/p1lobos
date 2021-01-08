@@ -1,5 +1,6 @@
 package Control;
 
+import View.Stopwatch;
 import View.Window;
 
 import javax.swing.*;
