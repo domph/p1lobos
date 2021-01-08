@@ -32,7 +32,7 @@ public class Platform extends GameObject{
         else
             position = 0;
         delay = ((Math.random()*2)/playerSpeed);
-        CreatePlatform(position, (height/2));
+        CreatePlatform(position, height);
         try {
             Thread.sleep((int) delay * 1000);
         }
@@ -41,7 +41,8 @@ public class Platform extends GameObject{
         }
     }
     public void CreatePlatform (double xpos,double ypos){
+        new GamePanel gamepanel;
+        gamepanel.AddObject(new Platform(xpos, ypos));
 
     }
 }
-
