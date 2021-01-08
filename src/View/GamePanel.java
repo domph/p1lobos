@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel {
@@ -30,6 +32,9 @@ public class GamePanel extends JPanel {
 	boolean LeftKeyDown = false;
 	boolean RightKeyDown = false;
 
+	//mouse
+	boolean canShoot = true;
+	int mouseX;
 
 	public GamePanel(Window CurrentWindow) {
 		// Basic design -- can change later
@@ -92,9 +97,16 @@ public class GamePanel extends JPanel {
 		if (!GameStarted) {
 			GameStarted = true;
 
+
+
+
 			// Create the main player; center it & position it 50 pixels above bottom
 			Player CurrentPlayer = new Player((getWidth() / 2.0) - (Player.SIZE_X / 2), getHeight() - PLAYER_START_Y_PADDING);
 			AddObject(CurrentPlayer);
+
+			//create and add bullet
+			Bullet bullet = new Bullet(0,0);
+			AddObject(bullet);
 
 			CurrentKeyEventDispatcher = e -> {
 				if (e.getID() == KeyEvent.KEY_PRESSED) {
@@ -111,6 +123,32 @@ public class GamePanel extends JPanel {
 				return false;
 			};
 			KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(CurrentKeyEventDispatcher);
+
+			addMouseListener(new MouseListener() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					if(canShoot){
+						System.out.println("shoot");
+						bullet.SetPosition(ObjectsToDraw.get(0).GetPosX(),ObjectsToDraw.get(0).GetPosY());
+						bullet.SetVelocity(0,-1000);
+					}
+					System.out.println("click");
+				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {}
+
+				@Override
+				public void mouseEntered(MouseEvent e) {}
+
+				@Override
+				public void mouseExited(MouseEvent e) {}
+
+
+			});
 
 			// Test platform to demo
 			AddObject(new Platform(getWidth() / 2.0 - 5, 400));
