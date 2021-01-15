@@ -87,6 +87,9 @@ public class GamePanel extends JPanel {
 		ObjectsToDraw.add(GO);
 	}
 
+	/*
+	to fix
+
 	public void RandomGeneration(){
 		for (int i = 1; i < 10; ++i) {
 			int width = getWidth();
@@ -106,7 +109,7 @@ public class GamePanel extends JPanel {
 			AddObject(new Platform(xpos, height));
 		}
 
-	}
+	}*/
 
 	public void StartGame() {
 		// Prevent accidentally calling this twice
@@ -140,7 +143,8 @@ public class GamePanel extends JPanel {
 			HigherPlatform.SetBounceVelY(-100);
 			AddObject(HigherPlatform);
 
-			RandomGeneration();
+			// RandomGeneration();
+			// Initial random generator can go here
 		}
 	}
 
