@@ -10,7 +10,7 @@ public class GameObject extends GraphicsElement {
 
     private double AccelX;
     private double AccelY;
-
+    private int Scoreupdate;
     public GameObject(double PosX, double PosY, double SizeX, double SizeY, Color DisplayColor) {
         super(PosX, PosY, SizeX, SizeY, DisplayColor);
     }
@@ -52,7 +52,7 @@ public class GameObject extends GraphicsElement {
 
     }
     public int UpdateScore(double TimeDelta){
-        Score += (VelX*TimeDelta + .5(AccelX^2))
-        return score;
+        Scoreupdate = (int)(-VelY*TimeDelta - .5*AccelY*(TimeDelta*TimeDelta));
+        return Scoreupdate;
     }
 }
