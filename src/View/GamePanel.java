@@ -35,6 +35,9 @@ public class GamePanel extends JPanel {
 	//mouse
 	boolean canShoot = true;
 	int mouseX;
+	int mouseY;
+	int dx;
+	int dy;
 
 	public GamePanel(Window CurrentWindow) {
 		// Basic design -- can change later
@@ -75,12 +78,30 @@ public class GamePanel extends JPanel {
 						// TO-DO: begin moving everything down to simulate "scrolling"
 
 					}
+
+					// colliding with a monster from above
+					else if((GO.GetVelY() > 0 && CollidingObject.getClass() == Monster.class)){
+						GO.SetVelocity(0, ((Monster) CollidingObject).GetBounceVelY());
+						CollidingObject.SetPosition(-75,-75);
+					}
+
+					else if((GO.GetVelY() < 0 && CollidingObject.getClass() == Monster.class)){
+						GO.SetPosition(-50,-50); // extrememly crude method of deletion msust fix immediately
+					}
 				}
 
 				// Move left/right based on whether left/right keys are down
 				// Don't move if both are down
 				if ((LeftKeyDown || RightKeyDown) && !(LeftKeyDown && RightKeyDown)) {
 					GO.SetPosition(GO.GetPosX() + (LeftKeyDown ? -PLAYER_MOVE_X_SPEED : PLAYER_MOVE_X_SPEED), GO.GetPosY());
+				}
+			}
+			if (GO.getClass() == Bullet.class){
+				GameObject CollidingObject = GO.GetCollidingObject(ObjectsToDraw);
+				if (CollidingObject != null){
+					if (CollidingObject.getClass() == Monster.class){
+						CollidingObject.SetPosition(-75,-75);
+					}
 				}
 			}
 		}
@@ -108,6 +129,11 @@ public class GamePanel extends JPanel {
 			Bullet bullet = new Bullet(0,0);
 			AddObject(bullet);
 
+
+			AddObject(new Monster(400,400));
+			AddObject(new Monster(200,200));
+
+
 			CurrentKeyEventDispatcher = e -> {
 				if (e.getID() == KeyEvent.KEY_PRESSED) {
 					switch (e.getKeyCode()) {
@@ -129,8 +155,15 @@ public class GamePanel extends JPanel {
 				public void mouseClicked(MouseEvent e) {
 					if(canShoot){
 						System.out.println("shoot");
+
+						mouseX = getMousePosition().x;
+						mouseY = getMousePosition().y;
+
+						dx = (int) (mouseX - ObjectsToDraw.get(0).GetPosX());
+						dy = (int) (mouseY - ObjectsToDraw.get(0).GetPosY());
+
 						bullet.SetPosition(ObjectsToDraw.get(0).GetPosX(),ObjectsToDraw.get(0).GetPosY());
-						bullet.SetVelocity(0,-1000);
+						bullet.SetVelocity(1000*dx/Math.hypot(dx,dy),1000*dy/Math.hypot(dx,dy)); //1000 is arbitrtary
 					}
 					System.out.println("click");
 				}
