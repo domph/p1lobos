@@ -11,8 +11,8 @@
 
 Date | Changes |
 ----------- | ----------- |
-1/16 | - [Added login feature](https://github.com/domph/p1lobos-doodlejump/issues/11) |
-12/20 | - [Graphics framework (graphicstest branch)](https://github.com/domph/p1lobos-doodlejump/blob/graphicstest/src/View/GamePanel.java): drawing of game objects; currently supports both colored rectangles and images (for images, physics calculations done on internal rectangle) <br> - [Basic main menu (graphicstest branch)](https://github.com/domph/p1lobos-doodlejump/blob/graphicstest/src/View/MainMenu.java): API for easily adding [buttons](https://github.com/domph/p1lobos-doodlejump/tree/graphicstest/src/View/UIUtilities); play button is the current entry point into game panel <br> - [keyrecognition (branch)](https://github.com/domph/p1lobos-doodlejump/tree/keyrecognition) adds recognition of when the left or right arrow key are pressed|<br> - [Scroll Demo](https://github.com/domph/p1lobos-doodlejump/commit/a15123b01b3c7b21ab83cd0135126e0adb204cb1); Includes algorithm to create Doodle Jump scrolling effect |
+1/16 | - [Added login feature](https://github.com/domph/p1lobos-doodlejump/issues/11) <br> - [Scroll Demo](https://github.com/domph/p1lobos-doodlejump/commit/a15123b01b3c7b21ab83cd0135126e0adb204cb1); Includes algorithm to create Doodle Jump scrolling effect |
+12/20 | - [Graphics framework (graphicstest branch)](https://github.com/domph/p1lobos-doodlejump/blob/graphicstest/src/View/GamePanel.java): drawing of game objects; currently supports both colored rectangles and images (for images, physics calculations done on internal rectangle) <br> - [Basic main menu (graphicstest branch)](https://github.com/domph/p1lobos-doodlejump/blob/graphicstest/src/View/MainMenu.java): API for easily adding [buttons](https://github.com/domph/p1lobos-doodlejump/tree/graphicstest/src/View/UIUtilities); play button is the current entry point into game panel <br> - [keyrecognition (branch)](https://github.com/domph/p1lobos-doodlejump/tree/keyrecognition) adds recognition of when the left or right arrow key are pressed|
 
 ## Contributors
 Contributor | GitHub Link |
