@@ -6,6 +6,7 @@ import javax.swing.*;
 
 public class Stopwatch implements ActionListener{
     //global variables + objects
+    //MODEL
     JFrame frame = new JFrame();
     JButton startButton = new JButton("Start");
     JButton resetButton = new JButton("Reset");
@@ -20,6 +21,7 @@ public class Stopwatch implements ActionListener{
     String minutes_string = String.format("%02d", minutes);
     String hours_string = String.format("%02d", hours);
 
+    //CONTROL
     Timer timer = new Timer(1000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -38,6 +40,7 @@ public class Stopwatch implements ActionListener{
     });
 
     //constructor
+    //VIEW
     Stopwatch(){
         timeLabel.setText(hours_string+":"+minutes_string+":"+seconds_string);
         timeLabel.setBounds(100,100,200,100);
