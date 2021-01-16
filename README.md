@@ -11,7 +11,7 @@
 
 ## Changelog (Big Ticket items)
 
-- Starting on 1/16, you should click on the feature item to be directed to the issue, which has more details on running, code contributions, etc.
+- Starting on 1/16, you should click on the feature item to be directed to the issue, which has more details on running, code contributions, etc. Unless otherwise stated in the ticket, most features should be run through the runtime guidelines specified above.
 
 Date | Changes |
 ----------- | ----------- |
