@@ -8,6 +8,7 @@
 ## Changelog (Big Ticket items)
 
 - Starting on 1/16, you should click on the feature item to be directed to the issue, which has more details on running, code contributions, etc.
+
 Date | Changes |
 ----------- | ----------- |
 1/16 | - [Added login feature](https://github.com/domph/p1lobos-doodlejump/issues/11) |
