@@ -38,6 +38,7 @@ public class GameObject extends GraphicsElement {
                 GetPosX() + GetSizeX() > Other.GetPosX() &&
                 GetPosY() < Other.GetPosY() + Other.GetSizeY() &&
                 GetPosY() + GetSizeY() > Other.GetPosY()) {
+
                 return Other;
             }
         }
@@ -48,5 +49,10 @@ public class GameObject extends GraphicsElement {
     public void UpdatePhysics(double TimeDelta) {
         SetVelocity(VelX + (AccelX * TimeDelta), VelY + (AccelY * TimeDelta));
         SetPosition(GetPosX() + (VelX * TimeDelta), GetPosY() + (VelY * TimeDelta));
+
+    }
+    public int UpdateScore(double TimeDelta){
+        Score += (VelX*TimeDelta + .5(AccelX^2))
+        return score;
     }
 }

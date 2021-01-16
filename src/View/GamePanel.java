@@ -17,6 +17,8 @@ public class GamePanel extends JPanel {
 	private static final int PLAYER_START_Y_PADDING = 50;	// start player 50 pixels from bottom
 	private static final int PLAYER_MOVE_X_SPEED = 2;
 
+	public int Score = 0;
+
 	/* CLASS MEMBERS */
 
 	private Color BACKGROUND_COLOR = new Color(255, 255, 255);
@@ -55,10 +57,11 @@ public class GamePanel extends JPanel {
 
 	// Should be called every frame (every 1/60 second or so...)
 	public void UpdatePhysics(double DeltaTime) {	// DeltaTime = how much time has passed since the last call
+		int score;
 		for (GameObject GO : ObjectsToDraw) {
 			// Update new positions
 			GO.UpdatePhysics(DeltaTime);
-
+			score = GO.UpdateScore(DeltaTime);
 			// Check if the player collided with an object
 			if (GO.getClass() == Player.class) {
 				GameObject CollidingObject = GO.GetCollidingObject(ObjectsToDraw);
