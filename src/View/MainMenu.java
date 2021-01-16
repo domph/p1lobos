@@ -30,8 +30,8 @@ public class MainMenu extends JPanel {
 	// Called every time a button is added; recenters all the buttons
 	private void OrderButtons() {
 		// Buttons
-		int ButtonPosX = (CurrentWindow.getSize().width / 2) - (BUTTON_SIZE.width / 2);	// centers buttons on the x axis
-		int ButtonStartPosY = (CurrentWindow.getSize().height / 2) - (((ButtonList.size() * BUTTON_SIZE.height) + ((ButtonList.size() - 1) * BUTTON_PADDING)) / 2);
+		int ButtonPosX = (CurrentWindow.getContentPane().getSize().width / 2) - (BUTTON_SIZE.width / 2);	// centers buttons on the x axis
+		int ButtonStartPosY = (CurrentWindow.getContentPane().getSize().height / 2) - (((ButtonList.size() * BUTTON_SIZE.height) + ((ButtonList.size() - 1) * BUTTON_PADDING)) / 2);
 		int Counter = 0;
 		for (JButton Button : ButtonList) {
 			Button.setBounds(ButtonPosX, ButtonStartPosY + (Counter * (BUTTON_SIZE.height + BUTTON_PADDING)), BUTTON_SIZE.width, BUTTON_SIZE.height);
