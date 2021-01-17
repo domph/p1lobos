@@ -43,6 +43,10 @@ public class Server {
 		}
 	}
 
+	public static boolean DoesHWIDExist() {
+		return ClientHWID != "_ERROR_";
+	}
+
 	public static boolean IsExistingUser() {
 		return (PlayerData != null && PlayerData.has("exists") && PlayerData.at("exists").asBoolean());
 	}

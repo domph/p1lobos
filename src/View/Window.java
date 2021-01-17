@@ -58,36 +58,40 @@ public class Window extends JFrame {
 		validate();
 		repaint();
 
-		// Begin login procedure
-		LM.AppendText("Connecting to server...");
-		new Thread(() -> {
-			boolean Result = Server.GetInit();
+		if (!Server.DoesHWIDExist()) {
+			LM.AppendText("Could not find a marker to identify your computer. Defaulting to offline mode. Your stats will not save!");
+			LM.SetProgressBar(100, true, () -> ShowMainMenu());
+		} else {
+			// Begin login procedure
+			LM.AppendText("Connecting to server...");
+			new Thread(() -> {
+				boolean Result = Server.GetInit();
 
-			if (!Result) {
-				LM.AppendText("ERROR: Unable to connect to the server. Defaulting to offline mode. Your stats will not save!");
-				LM.SetProgressBar(100, true, () -> ShowMainMenu());
-			} else {
-				if (Server.IsExistingUser()) {
-					LM.AppendText("Welcome, " + Server.GetName() + ".");
+				if (!Result) {
+					LM.AppendText("ERROR: Unable to connect to the server. Defaulting to offline mode. Your stats will not save!");
 					LM.SetProgressBar(100, true, () -> ShowMainMenu());
 				} else {
-					LM.AppendText("It looks like your computer is not registered with Doodle Jump! Enter a username (alphanumeric only) to link your computer with the server.");
-					LM.SetProgressBar(50, true, () -> new Thread(() -> {
-						for (int i = LOGIN_WINDOW_HEIGHT; i <= LOGIN_WINDOW_HEIGHT + REGISTER_HEIGHT; i += 2) {
-							setSize(Width, i);
-							setPreferredSize(new Dimension(Width, i));
-							try {
-								Thread.sleep(1);
-							} catch (Exception ignored) {}
-						}
-						setSize(Width, LOGIN_WINDOW_HEIGHT + REGISTER_HEIGHT);
-						setPreferredSize(new Dimension(Width, LOGIN_WINDOW_HEIGHT + REGISTER_HEIGHT));
-						LM.EnableRegister();
-					}).start());
+					if (Server.IsExistingUser()) {
+						LM.AppendText("Welcome, " + Server.GetName() + ".");
+						LM.SetProgressBar(100, true, () -> ShowMainMenu());
+					} else {
+						LM.AppendText("It looks like your computer is not registered with Doodle Jump! Enter a username (alphanumeric only) to link your computer with the server.");
+						LM.SetProgressBar(50, true, () -> new Thread(() -> {
+							for (int i = LOGIN_WINDOW_HEIGHT; i <= LOGIN_WINDOW_HEIGHT + REGISTER_HEIGHT; i += 2) {
+								setSize(Width, i);
+								setPreferredSize(new Dimension(Width, i));
+								try {
+									Thread.sleep(1);
+								} catch (Exception ignored) {}
+							}
+							setSize(Width, LOGIN_WINDOW_HEIGHT + REGISTER_HEIGHT);
+							setPreferredSize(new Dimension(Width, LOGIN_WINDOW_HEIGHT + REGISTER_HEIGHT));
+							LM.EnableRegister();
+						}).start());
+					}
 				}
-			}
-		}).start();
-
+			}).start();
+		}
 	}
 
 	public void ShowMainMenu() {
