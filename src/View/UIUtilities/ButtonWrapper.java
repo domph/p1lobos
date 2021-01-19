@@ -9,6 +9,8 @@ import java.awt.event.MouseEvent;
 public class ButtonWrapper {
 	private final JButton Button;
 	private boolean IsHovering = false;
+	private boolean IsLocked = false;
+	private Color DefaultColor;
 
 	// HoverDelta: Change of r, g, b components when button is hovered; ClickDelta: same but when button is clicked
 	public ButtonWrapper(JPanel Parent, String Text, int PosX, int PosY, int SizeX, int SizeY, Color DefaultColor, int HoverDelta, int ClickDelta, int FontSize) {
@@ -23,6 +25,7 @@ public class ButtonWrapper {
 		Button.setVerticalTextPosition(SwingConstants.CENTER);
 		Button.setBorderPainted(false);
 		Button.setFocusPainted(false);
+		this.DefaultColor = DefaultColor;
 
 		int R = DefaultColor.getRed(), G = DefaultColor.getGreen(), B = DefaultColor.getBlue();
 		Color HoverColor = new Color(R + HoverDelta, G + HoverDelta, B + HoverDelta);
@@ -32,30 +35,49 @@ public class ButtonWrapper {
 		Button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				new TweenColor(Button, ClickColor, 100);
+				if (!IsLocked) {
+					new TweenColor(Button, ClickColor, 100);
+				}
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (IsHovering) {
+				if (IsHovering && !IsLocked) {
 					new TweenColor(Button, HoverColor, 100);
 				}
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				IsHovering = true;
-				new TweenColor(Button, HoverColor, 100);
+				if (!IsLocked) {
+					IsHovering = true;
+					new TweenColor(Button, HoverColor, 100);
+				}
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				IsHovering = false;
-				new TweenColor(Button, DefaultColor, 100);
+				if (!IsLocked) {
+					IsHovering = false;
+					new TweenColor(Button, DefaultColor, 100);
+				}
 			}
 		});
 
 		Parent.add(Button);
+	}
+
+	public void Lock() {
+		IsLocked = true;
+	}
+
+	public void UnLock() {
+		IsLocked = false;
+		Button.setBackground(DefaultColor);
+	}
+
+	public boolean IsLocked() {
+		return IsLocked;
 	}
 
 	public JButton GetButtonObject() {
