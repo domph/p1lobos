@@ -79,14 +79,18 @@ public class GamePanel extends JPanel {
 
 					}
 
-					// colliding with a monster from above
+					// colliding with a monster from above (pretends its a platform)
 					else if((GO.GetVelY() > 0 && CollidingObject.getClass() == Monster.class)){
 						GO.SetVelocity(0, ((Monster) CollidingObject).GetBounceVelY());
 						CollidingObject.SetPosition(-75,-75);
 					}
 
+					// colliding with a monster from below (dies)
 					else if((GO.GetVelY() < 0 && CollidingObject.getClass() == Monster.class)){
-						GO.SetPosition(-50,-50); // extrememly crude method of deletion msust fix immediately
+						// "despawns" player
+						GO.SetPosition(-100,700);
+						GO.SetVelocity(0,0);
+						EndGame();
 					}
 				}
 
@@ -96,11 +100,20 @@ public class GamePanel extends JPanel {
 					GO.SetPosition(GO.GetPosX() + (LeftKeyDown ? -PLAYER_MOVE_X_SPEED : PLAYER_MOVE_X_SPEED), GO.GetPosY());
 				}
 			}
+
+			//bullet physics
 			if (GO.getClass() == Bullet.class){
+				if (Math.abs(GO.GetPosX()-250) > 250 || Math.abs(GO.GetPosY()-300) > 300 ){
+					GO.SetPosition(-10,-10);  //"despawns" bullet
+					GO.SetVelocity(0,0);
+					canShoot = true;
+				}
 				GameObject CollidingObject = GO.GetCollidingObject(ObjectsToDraw);
 				if (CollidingObject != null){
 					if (CollidingObject.getClass() == Monster.class){
-						CollidingObject.SetPosition(-75,-75);
+
+						CollidingObject.SetPosition(-75,-75); //"despawns" monster
+						canShoot = true;
 					}
 				}
 			}
@@ -126,12 +139,12 @@ public class GamePanel extends JPanel {
 			AddObject(CurrentPlayer);
 
 			//create and add bullet
-			Bullet bullet = new Bullet(0,0);
+			Bullet bullet = new Bullet(-10,-10);
 			AddObject(bullet);
 
-
-			AddObject(new Monster(400,400));
-			AddObject(new Monster(200,200));
+			// creates test monsters
+			AddObject(new Monster(50,400));
+			AddObject(new Monster(50,100));
 
 
 			CurrentKeyEventDispatcher = e -> {
@@ -153,30 +166,32 @@ public class GamePanel extends JPanel {
 			addMouseListener(new MouseListener() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+
+				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {
 					if(canShoot){
+
+						canShoot = false;
 						System.out.println("shoot");
 
 						mouseX = getMousePosition().x;
 						mouseY = getMousePosition().y;
 
-						dx = (int) (mouseX - ObjectsToDraw.get(0).GetPosX());
-						dy = (int) (mouseY - ObjectsToDraw.get(0).GetPosY());
+						//creates normalized directional vector
+						dx = (int) (mouseX - CurrentPlayer.GetPosX());
+						dy = (int) (mouseY - CurrentPlayer.GetPosY());
 
-						bullet.SetPosition(ObjectsToDraw.get(0).GetPosX(),ObjectsToDraw.get(0).GetPosY());
-						bullet.SetVelocity(1000*dx/Math.hypot(dx,dy),1000*dy/Math.hypot(dx,dy)); //1000 is arbitrtary
-					}
-					System.out.println("click");
+						bullet.SetPosition(CurrentPlayer.GetPosX(),CurrentPlayer.GetPosY());
+						bullet.SetVelocity((bullet.BULLET_SPEED)*dx/Math.hypot(dx,dy),(bullet.BULLET_SPEED)*dy/Math.hypot(dx,dy));
 				}
-
-				@Override
-				public void mousePressed(MouseEvent e) {}
+					System.out.println("click");}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {}
-
 				@Override
 				public void mouseEntered(MouseEvent e) {}
-
 				@Override
 				public void mouseExited(MouseEvent e) {}
 
@@ -192,6 +207,7 @@ public class GamePanel extends JPanel {
 		GameStarted = false;
 		if (CurrentKeyEventDispatcher != null) {
 			KeyboardFocusManager.getCurrentKeyboardFocusManager().removeKeyEventDispatcher(CurrentKeyEventDispatcher);
+			System.out.println("Game over!");
 		}
 	}
 }
