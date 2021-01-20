@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel {
@@ -30,6 +32,12 @@ public class GamePanel extends JPanel {
 	boolean LeftKeyDown = false;
 	boolean RightKeyDown = false;
 
+	//mouse
+	boolean canShoot = true;
+	int mouseX;
+	int mouseY;
+	int dx;
+	int dy;
 
 	public GamePanel(Window CurrentWindow) {
 		// Basic design -- can change later
@@ -70,12 +78,43 @@ public class GamePanel extends JPanel {
 						// TO-DO: begin moving everything down to simulate "scrolling"
 
 					}
+
+					// colliding with a monster from above (pretends its a platform)
+					else if((GO.GetVelY() > 0 && CollidingObject.getClass() == Monster.class)){
+						GO.SetVelocity(0, ((Monster) CollidingObject).GetBounceVelY());
+						CollidingObject.SetPosition(-75,-75);
+					}
+
+					// colliding with a monster from below (dies)
+					else if((GO.GetVelY() < 0 && CollidingObject.getClass() == Monster.class)){
+						// "despawns" player
+						GO.SetPosition(-100,700);
+						GO.SetVelocity(0,0);
+						EndGame();
+					}
 				}
 
 				// Move left/right based on whether left/right keys are down
 				// Don't move if both are down
 				if ((LeftKeyDown || RightKeyDown) && !(LeftKeyDown && RightKeyDown)) {
 					GO.SetPosition(GO.GetPosX() + (LeftKeyDown ? -PLAYER_MOVE_X_SPEED : PLAYER_MOVE_X_SPEED), GO.GetPosY());
+				}
+			}
+
+			//bullet physics
+			if (GO.getClass() == Bullet.class){
+				if (Math.abs(GO.GetPosX()-250) > 250 || Math.abs(GO.GetPosY()-300) > 300 ){
+					GO.SetPosition(-10,-10);  //"despawns" bullet
+					GO.SetVelocity(0,0);
+					canShoot = true;
+				}
+				GameObject CollidingObject = GO.GetCollidingObject(ObjectsToDraw);
+				if (CollidingObject != null){
+					if (CollidingObject.getClass() == Monster.class){
+
+						CollidingObject.SetPosition(-75,-75); //"despawns" monster
+						canShoot = true;
+					}
 				}
 			}
 		}
@@ -116,9 +155,21 @@ public class GamePanel extends JPanel {
 		if (!GameStarted) {
 			GameStarted = true;
 
+
+
+
 			// Create the main player; center it & position it 50 pixels above bottom
 			Player CurrentPlayer = new Player((getWidth() / 2.0) - (Player.SIZE_X / 2), getHeight() - PLAYER_START_Y_PADDING);
 			AddObject(CurrentPlayer);
+
+			//create and add bullet
+			Bullet bullet = new Bullet(-10,-10);
+			AddObject(bullet);
+
+			// creates test monsters
+			AddObject(new Monster(50,400));
+			AddObject(new Monster(50,100));
+
 
 			CurrentKeyEventDispatcher = e -> {
 				if (e.getID() == KeyEvent.KEY_PRESSED) {
@@ -136,6 +187,41 @@ public class GamePanel extends JPanel {
 			};
 			KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(CurrentKeyEventDispatcher);
 
+			addMouseListener(new MouseListener() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+
+				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+					if(canShoot){
+
+						canShoot = false;
+						System.out.println("shoot");
+
+						mouseX = getMousePosition().x;
+						mouseY = getMousePosition().y;
+
+						//creates normalized directional vector
+						dx = (int) (mouseX - CurrentPlayer.GetPosX());
+						dy = (int) (mouseY - CurrentPlayer.GetPosY());
+
+						bullet.SetPosition(CurrentPlayer.GetPosX(),CurrentPlayer.GetPosY());
+						bullet.SetVelocity((bullet.BULLET_SPEED)*dx/Math.hypot(dx,dy),(bullet.BULLET_SPEED)*dy/Math.hypot(dx,dy));
+				}
+					System.out.println("click");}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {}
+				@Override
+				public void mouseEntered(MouseEvent e) {}
+				@Override
+				public void mouseExited(MouseEvent e) {}
+
+
+			});
+
 			// Test platform to demo
 			AddObject(new Platform(getWidth() / 2.0 - 5, 400));
 
@@ -152,6 +238,7 @@ public class GamePanel extends JPanel {
 		GameStarted = false;
 		if (CurrentKeyEventDispatcher != null) {
 			KeyboardFocusManager.getCurrentKeyboardFocusManager().removeKeyEventDispatcher(CurrentKeyEventDispatcher);
+			System.out.println("Game over!");
 		}
 	}
 }

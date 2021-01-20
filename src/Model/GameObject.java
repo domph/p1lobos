@@ -47,6 +47,7 @@ public class GameObject extends GraphicsElement {
     // Calculates new position based on velocity + time elapsed (delta T)
     public void UpdatePhysics(double TimeDelta) {
         SetVelocity(VelX + (AccelX * TimeDelta), VelY + (AccelY * TimeDelta));
-        SetPosition(GetPosX() + (VelX * TimeDelta), GetPosY() + (VelY * TimeDelta));
+        SetPosition(((500 + GetPosX()) % 500) + (VelX * TimeDelta), GetPosY() + (VelY * TimeDelta));
+        //needs to scale properly if we decide the project window size scales
     }
 }
