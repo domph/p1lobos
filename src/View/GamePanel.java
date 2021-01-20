@@ -4,10 +4,7 @@ import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel {
@@ -24,6 +21,7 @@ public class GamePanel extends JPanel {
 	private Color BACKGROUND_COLOR = new Color(255, 255, 255);
 
 	private ArrayList<GameObject> ObjectsToDraw = new ArrayList<>();
+	private ArrayList<GameObject> ObjectsToRemove = new ArrayList<>();
 	private Window CurrentWindow;
 	private boolean GameStarted = false;
 
@@ -104,26 +102,40 @@ public class GamePanel extends JPanel {
 			//bullet physics
 			if (GO.getClass() == Bullet.class){
 				if (Math.abs(GO.GetPosX()-250) > 250 || Math.abs(GO.GetPosY()-300) > 300 ){
-					GO.SetPosition(-10,-10);  //"despawns" bullet
-					GO.SetVelocity(0,0);
+					//GO.SetPosition(-10,-10);  //"despawns" bullet
+					//GO.SetVelocity(0,0);
+					RemoveObject(GO);
 					canShoot = true;
+					System.out.println("destroy bullet");
 				}
 				GameObject CollidingObject = GO.GetCollidingObject(ObjectsToDraw);
 				if (CollidingObject != null){
 					if (CollidingObject.getClass() == Monster.class){
 
-						CollidingObject.SetPosition(-75,-75); //"despawns" monster
+						// CollidingObject.SetPosition(-75,-75); //"despawns" monster
+						RemoveObject(CollidingObject);
 						canShoot = true;
+						System.out.println("destroy monster");
 					}
 				}
 			}
 		}
+
+		// Iterate over ObjectsToRemove
+		for (GameObject GO : ObjectsToRemove) {
+			ObjectsToDraw.remove(GO);
+		}
+		ObjectsToRemove.clear();
 		repaint();
 	}
 
 	// Add object to the list of objects rendered
 	public void AddObject(GameObject GO) {
 		ObjectsToDraw.add(GO);
+	}
+
+	public void RemoveObject(GameObject GO) {
+		ObjectsToRemove.add(GO);	// add to the list; will actually be removed in the next physics "step"
 	}
 
 	/*
@@ -163,8 +175,8 @@ public class GamePanel extends JPanel {
 			AddObject(CurrentPlayer);
 
 			//create and add bullet
-			Bullet bullet = new Bullet(-10,-10);
-			AddObject(bullet);
+			//Bullet bullet = new Bullet(-10,-10);
+			//AddObject(bullet);
 
 			// creates test monsters
 			AddObject(new Monster(50,400));
@@ -187,15 +199,10 @@ public class GamePanel extends JPanel {
 			};
 			KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(CurrentKeyEventDispatcher);
 
-			addMouseListener(new MouseListener() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-
-				}
-
+			addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if(canShoot){
+					if (canShoot){
 
 						canShoot = false;
 						System.out.println("shoot");
@@ -207,19 +214,12 @@ public class GamePanel extends JPanel {
 						dx = (int) (mouseX - CurrentPlayer.GetPosX());
 						dy = (int) (mouseY - CurrentPlayer.GetPosY());
 
-						bullet.SetPosition(CurrentPlayer.GetPosX(),CurrentPlayer.GetPosY());
+						Bullet bullet = new Bullet(CurrentPlayer.GetPosX(), CurrentPlayer.GetPosY());
+						AddObject(bullet);
 						bullet.SetVelocity((bullet.BULLET_SPEED)*dx/Math.hypot(dx,dy),(bullet.BULLET_SPEED)*dy/Math.hypot(dx,dy));
+					}
+					System.out.println("click");
 				}
-					System.out.println("click");}
-
-				@Override
-				public void mouseReleased(MouseEvent e) {}
-				@Override
-				public void mouseEntered(MouseEvent e) {}
-				@Override
-				public void mouseExited(MouseEvent e) {}
-
-
 			});
 
 			// Test platform to demo
