@@ -27,6 +27,7 @@ public class MainMenu extends JPanel {
 		return NewButton;
 	}
 
+
 	// Called every time a button is added; recenters all the buttons
 	private void OrderButtons() {
 		// Buttons

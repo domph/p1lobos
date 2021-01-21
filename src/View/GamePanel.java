@@ -61,7 +61,9 @@ public class GamePanel extends JPanel {
 		for (GameObject GO : ObjectsToDraw) {
 			// Update new positions
 			GO.UpdatePhysics(DeltaTime);
-			score = GO.UpdateScore(DeltaTime);
+			score += GO.UpdateScore(DeltaTime);
+			ScoreKeeper.setText("Score: " + score);
+
 			// Check if the player collided with an object
 			if (GO.getClass() == Player.class) {
 				GameObject CollidingObject = GO.GetCollidingObject(ObjectsToDraw);
@@ -89,11 +91,14 @@ public class GamePanel extends JPanel {
 	public void AddObject(GameObject GO) {
 		ObjectsToDraw.add(GO);
 	}
+	public JLabel AddLabel(String Text){
+		JLabel NewLabel = new JLabel(Text);
+		return NewLabel;
+	}
 
 	public void RandomGeneration(){
-		for (int i = 1; i < 10; ++i) {
 			int width = getWidth();
-			int height = (int)((i / 10.0) * getHeight());
+			int height = getHeight();
 			double Random = Math.random();
 			double xpos, ypos;
 			if (Random > 0.5) {
@@ -105,6 +110,10 @@ public class GamePanel extends JPanel {
 			} else {
 				xpos = 0;
 				//ypos = 0;
+			}
+			double powerup = Math.random();
+			if (powerup == 0.01) {
+				//Create a powerup on the platform at xpos,height(I have no damn clue how I'm going to draw it, probably a green block.
 			}
 			AddObject(new Platform(xpos, height));
 		}
@@ -119,6 +128,9 @@ public class GamePanel extends JPanel {
 			// Create the main player; center it & position it 50 pixels above bottom
 			Player CurrentPlayer = new Player((getWidth() / 2.0) - (Player.SIZE_X / 2), getHeight() - PLAYER_START_Y_PADDING);
 			AddObject(CurrentPlayer);
+			Jlabel ScoreKeeper = AddLabel("Score: 0");
+			ScoreKeeper.setLocation((getWidth() / 2),(getHeight() / 2));
+
 
 			CurrentKeyEventDispatcher = e -> {
 				if (e.getID() == KeyEvent.KEY_PRESSED) {
