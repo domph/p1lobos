@@ -114,6 +114,7 @@ public class GamePanel extends JPanel {
 			double powerup = Math.random();
 			if (powerup == 0.01) {
 				//Create a powerup on the platform at xpos,height(I have no damn clue how I'm going to draw it, probably a green block.
+				AddObject(new Powerup(xpos,height+25));
 			}
 			AddObject(new Platform(xpos, height));
 		}
